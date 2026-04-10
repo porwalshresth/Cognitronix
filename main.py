@@ -44,3 +44,12 @@ top10 = np.argsort(predicted)[::-1][:10]
 print(f"\n🎬 Top 10 recommendations for User 1:")
 print(top10)
 print("\n✅ PIPELINE COMPLETE!")
+# ─── STEP 7: SHOW MOVIE NAMES ───
+movies = pd.read_csv('ml-100k/u.item', sep='|', names=range(24), encoding='latin-1')
+movies = movies[[0, 1]]
+movies.columns = ['item_id', 'title']
+
+print("\n🎬 Recommended Movies for User 1:")
+for i, movie_id in enumerate(top10):
+    title = movies[movies['item_id'] == movie_id + 1]['title'].values[0]
+    print(f"{i+1}. {title}")
